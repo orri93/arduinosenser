@@ -43,8 +43,8 @@ double Maximum;
 uint8_t check(double& reading) {
   return check(reading, Minimum, Maximum);
 }
-}
 #endif
+}
 }
 
 #ifdef GOS_SENSOR_CLASS
