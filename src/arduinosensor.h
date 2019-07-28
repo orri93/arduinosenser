@@ -14,7 +14,7 @@ const char* error(const uint8_t& status, uint8_t& length);
 extern double value;
 namespace range {
 uint8_t check(double& reading, const double& minimum, const double& maximum);
-#ifdef GOS_SENSOR_GLOBAL
+#ifndef GOS_SENSOR_GLOBAL_DISMISS
 extern double Minimum;
 extern double Maximum;
 uint8_t check(double& reading);
@@ -22,7 +22,7 @@ uint8_t check(double& reading);
 }
 }
 
-#ifdef GOS_SENSOR_CLASS
+#ifndef GOS_SENSOR_CLASS_DISMISS
 class Sensor {
 public:
   Sensor(const double& minimum, const double& maximum);

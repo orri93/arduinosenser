@@ -38,7 +38,7 @@ uint8_t check(double& reading, const double& minimum, const double& maximum) {
     return GOS_SENSOR_STATUS_ABOVE_MAXIMUM;
   }
 }
-#ifdef GOS_SENSOR_GLOBAL
+#ifndef GOS_SENSOR_GLOBAL_DISMISS
 double Minimum;
 double Maximum;
 uint8_t check(double& reading) {
@@ -48,7 +48,7 @@ uint8_t check(double& reading) {
 }
 }
 
-#ifdef GOS_SENSOR_CLASS
+#ifndef GOS_SENSOR_CLASS_DISMISS
 Sensor::Sensor(const double& minimum, const double& maximum) :
   Minimum(minimum),
   Maximum(maximum) {
