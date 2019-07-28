@@ -16,7 +16,7 @@ uint8_t check(double& reading, const double& minimum, const double& maximum);
 #ifdef GOS_SENSOR_GLOBAL
 extern double Minimum;
 extern double Maximum;
-int check(const double& reading);
+uint8_t check(double& reading);
 extern double value;
 #endif
 }
@@ -26,7 +26,7 @@ extern double value;
 class Sensor {
 public:
   Sensor(const double& minimum, const double& maximum);
-  int check(const double& reading);
+  uint8_t check(double& reading);
 
   double Minimum;
   double Maximum;

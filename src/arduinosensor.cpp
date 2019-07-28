@@ -1,29 +1,31 @@
-#include <arduinosensor.h>
+#include "arduinosensor.h"
 
 namespace gos {
 namespace sensor {
 const char* error(const uint8_t& status) {
-  switch(status) {
+  switch (status) {
   case GOS_SENSOR_STATUS_OK:
     return "Ok";
   case GOS_SENSOR_STATUS_BELOW_MINIMUM:
     return "Below Min";
   case GOS_SENSOR_STATUS_ABOVE_MAXIMUM:
-    return "Above Min";
+    return "Above Max";
   default:
     return nullptr;
   }
 }
 namespace range {
 uint8_t check(double& reading, const double& minimum, const double& maximum) {
-  if(
+  if (
     reading >= minimum &&
     reading <= maximum) {
-      return GOS_SENSOR_STATUS_OK;
-  } else if (reading < minimum) {
+    return GOS_SENSOR_STATUS_OK;
+  }
+  else if (reading < minimum) {
     reading = minimum;
     return GOS_SENSOR_STATUS_BELOW_MINIMUM;
-  } else {
+  }
+  else {
     reading = maximum;
     return GOS_SENSOR_STATUS_ABOVE_MAXIMUM;
   }
@@ -31,9 +33,11 @@ uint8_t check(double& reading, const double& minimum, const double& maximum) {
 #ifdef GOS_SENSOR_GLOBAL
 double Minimum;
 double Maximum;
-uint8_t check(double& reading);
+uint8_t check(double& reading) {
   return check(reading, Minimum, Maximum);
 }
+}
+#endif
 }
 
 #ifdef GOS_SENSOR_CLASS
@@ -41,7 +45,7 @@ Sensor::Sensor(const double& minimum, const double& maximum) :
   Minimum(minimum),
   Maximum(maximum) {
 }
-int Sensor::check(double& reading) {
+uint8_t Sensor::check(double& reading) {
   return ::gos::sensor::range::check(reading, Minimum, Maximum);
 }
 #endif
