@@ -1,15 +1,22 @@
 #include "arduinosensor.h"
 
+#define _GOS_ARDUINO_SENSOR_TEXT_OK_ "Ok"
+#define _GOS_ARDUINO_SENSOR_TEXT_BELOW_MINIMUM_ "Below Min"
+#define _GOS_ARDUINO_SENSOR_TEXT_ABOVE_MAXIMUM_ "Above Max"
+
 namespace gos {
 namespace sensor {
-const char* error(const uint8_t& status) {
+const char* error(const uint8_t& status, uint8_t& length) {
   switch (status) {
   case GOS_SENSOR_STATUS_OK:
-    return "Ok";
+    length = sizeof(_GOS_ARDUINO_SENSOR_TEXT_OK_);
+    return _GOS_ARDUINO_SENSOR_TEXT_OK_;
   case GOS_SENSOR_STATUS_BELOW_MINIMUM:
-    return "Below Min";
+    length = sizeof(_GOS_ARDUINO_SENSOR_TEXT_BELOW_MINIMUM_);
+    return _GOS_ARDUINO_SENSOR_TEXT_BELOW_MINIMUM_;
   case GOS_SENSOR_STATUS_ABOVE_MAXIMUM:
-    return "Above Max";
+    length = sizeof(_GOS_ARDUINO_SENSOR_TEXT_ABOVE_MAXIMUM_);
+    return _GOS_ARDUINO_SENSOR_TEXT_ABOVE_MAXIMUM_;
   default:
     return nullptr;
   }

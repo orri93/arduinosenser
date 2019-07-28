@@ -1,5 +1,5 @@
-#ifndef _GOS_ARDUINO_LIBRARY_MAX_SENSOR_H_
-#define _GOS_ARDUINO_LIBRARY_MAX_SENSOR_H_
+#ifndef _GOS_ARDUINO_LIBRARY_SENSOR_H_
+#define _GOS_ARDUINO_LIBRARY_SENSOR_H_
 
 #include <Arduino.h>
 
@@ -10,7 +10,7 @@
 
 namespace gos {
 namespace sensor {
-const char* error(const uint8_t& status);
+const char* error(const uint8_t& status, uint8_t& length);
 namespace range {
 uint8_t check(double& reading, const double& minimum, const double& maximum);
 #ifdef GOS_SENSOR_GLOBAL
@@ -34,4 +34,4 @@ public:
 #endif
 }
 
-#endif /* _FDS_ARDUINO_LIBRARY_DEBUG_SERIAL_H_ */
+#endif /* _GOS_ARDUINO_LIBRARY_SENSOR_H_ */
