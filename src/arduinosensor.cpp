@@ -15,7 +15,7 @@ const char* error(const uint8_t& status) {
   }
 }
 namespace range {
-int check(double& reading, const double& minimum, const double& maximum) {
+uint8_t check(double& reading, const double& minimum, const double& maximum) {
   if(
     reading >= minimum &&
     reading <= maximum) {
@@ -31,7 +31,7 @@ int check(double& reading, const double& minimum, const double& maximum) {
 #ifdef GOS_SENSOR_GLOBAL
 double Minimum;
 double Maximum;
-int check(double& reading);
+uint8_t check(double& reading);
   return check(reading, Minimum, Maximum);
 }
 }

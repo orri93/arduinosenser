@@ -8,14 +8,11 @@
 #define GOS_SENSOR_STATUS_BELOW_MINIMUM 2
 #define GOS_SENSOR_STATUS_ABOVE_MAXIMUM 3
 
-#define GOS_SENSOR_GLOBAL
-#define GOS_SENSOR_CLASS
-
 namespace gos {
 namespace sensor {
 const char* error(const uint8_t& status);
 namespace range {
-int check(double& reading, const double& minimum, const double& maximum);
+uint8_t check(double& reading, const double& minimum, const double& maximum);
 #ifdef GOS_SENSOR_GLOBAL
 extern double Minimum;
 extern double Maximum;
