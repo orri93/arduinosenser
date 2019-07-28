@@ -11,13 +11,13 @@
 namespace gos {
 namespace sensor {
 const char* error(const uint8_t& status, uint8_t& length);
+extern double value;
 namespace range {
 uint8_t check(double& reading, const double& minimum, const double& maximum);
 #ifdef GOS_SENSOR_GLOBAL
 extern double Minimum;
 extern double Maximum;
 uint8_t check(double& reading);
-extern double value;
 #endif
 }
 }

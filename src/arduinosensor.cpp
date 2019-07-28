@@ -21,6 +21,7 @@ const char* error(const uint8_t& status, uint8_t& length) {
     return nullptr;
   }
 }
+double value;
 namespace range {
 uint8_t check(double& reading, const double& minimum, const double& maximum) {
   if (
