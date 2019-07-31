@@ -6,6 +6,7 @@
 
 namespace gos {
 namespace sensor {
+static uint8_t last_status_;
 const char* error(const uint8_t& status, uint8_t& length) {
   switch (status) {
   case GOS_SENSOR_STATUS_OK:
@@ -21,26 +22,29 @@ const char* error(const uint8_t& status, uint8_t& length) {
     return nullptr;
   }
 }
+const char* error(uint8_t& length) {
+  return error(last_status_, length);
+}
 double value;
 namespace range {
 uint8_t check(double& reading, const double& minimum, const double& maximum) {
   if (
     reading >= minimum &&
     reading <= maximum) {
-    return GOS_SENSOR_STATUS_OK;
+    return last_status_ = GOS_SENSOR_STATUS_OK;
   }
   else if (reading < minimum) {
     reading = minimum;
-    return GOS_SENSOR_STATUS_BELOW_MINIMUM;
+    return last_status_ = GOS_SENSOR_STATUS_BELOW_MINIMUM;
   }
   else {
     reading = maximum;
-    return GOS_SENSOR_STATUS_ABOVE_MAXIMUM;
+    return last_status_ = GOS_SENSOR_STATUS_ABOVE_MAXIMUM;
   }
 }
 #ifndef GOS_SENSOR_GLOBAL_DISMISS
-double Minimum;
-double Maximum;
+double Minimum = GOS_SENSOR_DEFAULT_MINIMUM;
+double Maximum = GOS_SENSOR_DEFAULT_MAXIMUM;
 uint8_t check(double& reading) {
   return check(reading, Minimum, Maximum);
 }
